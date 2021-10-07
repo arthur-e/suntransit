@@ -6,6 +6,27 @@ suntransit
 [![DOI](https://zenodo.org/badge/414701058.svg)](https://zenodo.org/badge/latestdoi/414701058)
 
 
+Example Use
+-----------
+
+```py
+import datetime
+import numpy as np
+from suntransit import sunrise_sunset
+
+missoula = (46.8625, -114.0117)
+today = datetime.date(2021, 10, 7)
+
+# Get (sunrise, sunset) hour in UTC
+sunrise_sunset(missoula, today)
+# (13.733140671716853, 1.062543659843307)
+
+# Get (sunrise, sunset) hour in local time (GMT-6:00)
+np.array(sunrise_sunset(missoula, today)) + 6
+# array([19.73314067,  7.06254366])
+```
+
+
 Installation
 ------------
 
