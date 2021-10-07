@@ -19,6 +19,8 @@ The only dependency is `numpy`.
 Documentation
 -------------
 
+[Online documentation can be found here.](https://arthur-e.github.io/suntransit/)
+
 
 Testing
 -------
