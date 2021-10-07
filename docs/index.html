@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>suntransit API documentation</title>
+<title>__init__ API documentation</title>
 <meta name="description" content="Module for calculating sunrise and sunset times and, more importantly, for the
 length of a day (in hours). The core algorithm is `sunrise_sunset()`." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -21,11 +21,11 @@ length of a day (in hours). The core algorithm is `sunrise_sunset()`." />
 <main>
 <article id="content">
 <header>
-<h1 class="title">Package <code>suntransit</code></h1>
+<h1 class="title">Module <code>__init__</code></h1>
 </header>
 <section id="section-intro">
 <p>Module for calculating sunrise and sunset times and, more importantly, for the
-length of a day (in hours). The core algorithm is <code><a title="suntransit.sunrise_sunset" href="#suntransit.sunrise_sunset">sunrise_sunset()</a></code>.</p>
+length of a day (in hours). The core algorithm is <code><a title="__init__.sunrise_sunset" href="#__init__.sunrise_sunset">sunrise_sunset()</a></code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -166,12 +166,15 @@ def sunrise_sunset(coords, dt, zenith = -0.83):
     Returns the hour of sunrise and sunset for a given date. Hours are on the
     closed interval [0, 23] because Python starts counting at zero; i.e., if
     we want to index an array of hourly data, 23 is the last hour of the day.
+    If the sun never rises or never sets at the specific location and on the
+    specified date, returns -1.
+
     Recommended solar zenith angles for sunrise and sunset are -6 degrees for
     civil sunrise/ sunset; -0.5 degrees for &#34;official&#34; sunrise/sunset; and
     -0.83 degrees to account for the effects of refraction. A zenith angle of
-    -0.5 degrees produces results closest to those of pyephem&#39;s
-    Observer.next_rising() and Observer.next_setting(). This calculation does
-    not include corrections for elevation or nutation nor does it explicitly
+    -0.5 degrees produces results closest to those of `Observer.next_rising()`
+    and `Observer.next_setting()` in `pyephem`. This calculation does not
+    include corrections for elevation or nutation nor does it explicitly
     correct for atmospheric refraction. Source:
 
     - U.S. Naval Observatory. &#34;Almanac for Computers.&#34; 1990. Reproduced by
@@ -247,10 +250,10 @@ def sunrise_sunset(coords, dt, zenith = -0.83):
     (0.06571 * (tmean - 0.25)) - 6.622
     hour_sets = (hour_angle / 15) + ra_hours -\
     (0.06571 * (tmean + 0.25)) - 6.622
-    # Round to nearest hour, convert to UTC
+    # Cconvert to UTC
     return (
-        np.floor((hour_rise - lng_hour) % 24),
-        np.floor((hour_sets - lng_hour) % 24))</code></pre>
+        (hour_rise - lng_hour) % 24,
+        (hour_sets - lng_hour) % 24)</code></pre>
 </details>
 </section>
 <section>
@@ -260,7 +263,7 @@ def sunrise_sunset(coords, dt, zenith = -0.83):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="suntransit.ecliptic_longitude"><code class="name flex">
+<dt id="__init__.ecliptic_longitude"><code class="name flex">
 <span>def <span class="ident">ecliptic_longitude</span></span>(<span>true_anomaly, omega=102.937348)</span>
 </code></dt>
 <dd>
@@ -304,7 +307,7 @@ Meeus, J. (1991). Astronomical Algorithms. Willman-Bell Inc.</p>
     return (true_anomaly + 180 + omega) % 360</code></pre>
 </details>
 </dd>
-<dt id="suntransit.equation_of_center"><code class="name flex">
+<dt id="__init__.equation_of_center"><code class="name flex">
 <span>def <span class="ident">equation_of_center</span></span>(<span>anomaly)</span>
 </code></dt>
 <dd>
@@ -347,7 +350,7 @@ The Nautical Almanac Office, U.S. Naval Observatory, Washington, D.C.</p>
     return (1.916 * _sine(anomaly)) + (0.02 * _sine(2 * anomaly))</code></pre>
 </details>
 </dd>
-<dt id="suntransit.julian_day"><code class="name flex">
+<dt id="__init__.julian_day"><code class="name flex">
 <span>def <span class="ident">julian_day</span></span>(<span>year, month, day)</span>
 </code></dt>
 <dd>
@@ -397,7 +400,7 @@ Equation 7.1 in Meeus (1991).</p>
         np.floor(30.6001 * (month + 1)) + day + b - 1524.5</code></pre>
 </details>
 </dd>
-<dt id="suntransit.obliquity"><code class="name flex">
+<dt id="__init__.obliquity"><code class="name flex">
 <span>def <span class="ident">obliquity</span></span>(<span>t_solar)</span>
 </code></dt>
 <dd>
@@ -427,7 +430,7 @@ years in 2000 +/- 10,000 years. Taken from Equation 21.2 in Meeus (1991).</p>
         (5.0361e-7 * np.power(t_solar, 3))</code></pre>
 </details>
 </dd>
-<dt id="suntransit.solar_noon_zenith_angle"><code class="name flex">
+<dt id="__init__.solar_noon_zenith_angle"><code class="name flex">
 <span>def <span class="ident">solar_noon_zenith_angle</span></span>(<span>coords, dt)</span>
 </code></dt>
 <dd>
@@ -485,19 +488,21 @@ be scalars or arrays (for times at multiple locations on same date)</dd>
     return lat - declination</code></pre>
 </details>
 </dd>
-<dt id="suntransit.sunrise_sunset"><code class="name flex">
+<dt id="__init__.sunrise_sunset"><code class="name flex">
 <span>def <span class="ident">sunrise_sunset</span></span>(<span>coords, dt, zenith=-0.83)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns the hour of sunrise and sunset for a given date. Hours are on the
 closed interval [0, 23] because Python starts counting at zero; i.e., if
 we want to index an array of hourly data, 23 is the last hour of the day.
-Recommended solar zenith angles for sunrise and sunset are -6 degrees for
+If the sun never rises or never sets at the specific location and on the
+specified date, returns -1.</p>
+<p>Recommended solar zenith angles for sunrise and sunset are -6 degrees for
 civil sunrise/ sunset; -0.5 degrees for "official" sunrise/sunset; and
 -0.83 degrees to account for the effects of refraction. A zenith angle of
--0.5 degrees produces results closest to those of pyephem's
-Observer.next_rising() and Observer.next_setting(). This calculation does
-not include corrections for elevation or nutation nor does it explicitly
+-0.5 degrees produces results closest to those of <code>Observer.next_rising()</code>
+and <code>Observer.next_setting()</code> in <code>pyephem</code>. This calculation does not
+include corrections for elevation or nutation nor does it explicitly
 correct for atmospheric refraction. Source:</p>
 <ul>
 <li>U.S. Naval Observatory. "Almanac for Computers." 1990. Reproduced by
@@ -542,12 +547,15 @@ sun with respect to its highest point in the sky (90 is solar noon)
     Returns the hour of sunrise and sunset for a given date. Hours are on the
     closed interval [0, 23] because Python starts counting at zero; i.e., if
     we want to index an array of hourly data, 23 is the last hour of the day.
+    If the sun never rises or never sets at the specific location and on the
+    specified date, returns -1.
+
     Recommended solar zenith angles for sunrise and sunset are -6 degrees for
     civil sunrise/ sunset; -0.5 degrees for &#34;official&#34; sunrise/sunset; and
     -0.83 degrees to account for the effects of refraction. A zenith angle of
-    -0.5 degrees produces results closest to those of pyephem&#39;s
-    Observer.next_rising() and Observer.next_setting(). This calculation does
-    not include corrections for elevation or nutation nor does it explicitly
+    -0.5 degrees produces results closest to those of `Observer.next_rising()`
+    and `Observer.next_setting()` in `pyephem`. This calculation does not
+    include corrections for elevation or nutation nor does it explicitly
     correct for atmospheric refraction. Source:
 
     - U.S. Naval Observatory. &#34;Almanac for Computers.&#34; 1990. Reproduced by
@@ -623,10 +631,10 @@ sun with respect to its highest point in the sky (90 is solar noon)
     (0.06571 * (tmean - 0.25)) - 6.622
     hour_sets = (hour_angle / 15) + ra_hours -\
     (0.06571 * (tmean + 0.25)) - 6.622
-    # Round to nearest hour, convert to UTC
+    # Cconvert to UTC
     return (
-        np.floor((hour_rise - lng_hour) % 24),
-        np.floor((hour_sets - lng_hour) % 24))</code></pre>
+        (hour_rise - lng_hour) % 24,
+        (hour_sets - lng_hour) % 24)</code></pre>
 </details>
 </dd>
 </dl>
@@ -642,12 +650,12 @@ sun with respect to its highest point in the sky (90 is solar noon)
 <ul id="index">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="suntransit.ecliptic_longitude" href="#suntransit.ecliptic_longitude">ecliptic_longitude</a></code></li>
-<li><code><a title="suntransit.equation_of_center" href="#suntransit.equation_of_center">equation_of_center</a></code></li>
-<li><code><a title="suntransit.julian_day" href="#suntransit.julian_day">julian_day</a></code></li>
-<li><code><a title="suntransit.obliquity" href="#suntransit.obliquity">obliquity</a></code></li>
-<li><code><a title="suntransit.solar_noon_zenith_angle" href="#suntransit.solar_noon_zenith_angle">solar_noon_zenith_angle</a></code></li>
-<li><code><a title="suntransit.sunrise_sunset" href="#suntransit.sunrise_sunset">sunrise_sunset</a></code></li>
+<li><code><a title="__init__.ecliptic_longitude" href="#__init__.ecliptic_longitude">ecliptic_longitude</a></code></li>
+<li><code><a title="__init__.equation_of_center" href="#__init__.equation_of_center">equation_of_center</a></code></li>
+<li><code><a title="__init__.julian_day" href="#__init__.julian_day">julian_day</a></code></li>
+<li><code><a title="__init__.obliquity" href="#__init__.obliquity">obliquity</a></code></li>
+<li><code><a title="__init__.solar_noon_zenith_angle" href="#__init__.solar_noon_zenith_angle">solar_noon_zenith_angle</a></code></li>
+<li><code><a title="__init__.sunrise_sunset" href="#__init__.sunrise_sunset">sunrise_sunset</a></code></li>
 </ul>
 </li>
 </ul>
