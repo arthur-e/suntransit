@@ -218,7 +218,7 @@ def sunrise_sunset(coords, dt, zenith = -0.83):
     (0.06571 * (tmean - 0.25)) - 6.622
     hour_sets = (hour_angle / 15) + ra_hours -\
     (0.06571 * (tmean + 0.25)) - 6.622
-    # Cconvert to UTC
+    # Convert to UTC
     return (
         (hour_rise - lng_hour) % 24,
         (hour_sets - lng_hour) % 24)

@@ -5,6 +5,8 @@ suntransit
 
 [![DOI](https://zenodo.org/badge/414701058.svg)](https://zenodo.org/badge/latestdoi/414701058)
 
+Earth system models and other biogeochemical simulations often require an estimate of the day length and, therefore, of sunrise and sunset times. Highly precise solar transit information can be obtained from Python libraries like `pyephem` and `astral`, but these are general-purpose libraries and the corresponding routines are slow. If we can tolerate an error in transit times on the order of a few minutes, then we should also be able to calculate transit times much faster! That's the idea here: using a fast approximation for sunrise and sunset times. [Read more about the alternatives and the performance of an earlier version of this library.](http://karthur.org/2021/day-length-calculation-earth-system-models.html)
+
 
 Example Use
 -----------
