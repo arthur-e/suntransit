@@ -3,6 +3,8 @@ suntransit
 
 **Simple, fast approximation of sunrise, sunset time on Earth.**
 
+[![DOI](https://zenodo.org/badge/414701058.svg)](https://zenodo.org/badge/latestdoi/414701058)
+
 
 Installation
 ------------
