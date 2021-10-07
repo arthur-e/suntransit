@@ -134,12 +134,15 @@ def sunrise_sunset(coords, dt, zenith = -0.83):
     Returns the hour of sunrise and sunset for a given date. Hours are on the
     closed interval [0, 23] because Python starts counting at zero; i.e., if
     we want to index an array of hourly data, 23 is the last hour of the day.
+    If the sun never rises or never sets at the specific location and on the
+    specified date, returns -1.
+
     Recommended solar zenith angles for sunrise and sunset are -6 degrees for
     civil sunrise/ sunset; -0.5 degrees for "official" sunrise/sunset; and
     -0.83 degrees to account for the effects of refraction. A zenith angle of
-    -0.5 degrees produces results closest to those of pyephem's
-    Observer.next_rising() and Observer.next_setting(). This calculation does
-    not include corrections for elevation or nutation nor does it explicitly
+    -0.5 degrees produces results closest to those of `Observer.next_rising()`
+    and `Observer.next_setting()` in `pyephem`. This calculation does not
+    include corrections for elevation or nutation nor does it explicitly
     correct for atmospheric refraction. Source:
 
     - U.S. Naval Observatory. "Almanac for Computers." 1990. Reproduced by
