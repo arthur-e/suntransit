@@ -22,8 +22,8 @@ sunrise_sunset(missoula, today)
 # (13.733140671716853, 1.062543659843307)
 
 # Get (sunrise, sunset) hour in local time (GMT-6:00)
-np.array(sunrise_sunset(missoula, today)) + 6
-# array([19.73314067,  7.06254366])
+(np.array(sunrise_sunset(missoula, today)) - 6) % 24
+# array([ 7.73314067, 19.06254366])
 ```
 
 And for (quasi-)vectorization:
